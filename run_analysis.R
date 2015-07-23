@@ -2,17 +2,28 @@
 ##    Check for previous download and extraction before performing these steps.
 ##    This saves time and we don't want to unnecessarily pound on the server.
 
-if(!file.exists("dataArchive.zip")) {
-    message("Data archive not found, downloading and expanding archive ...")
-    theUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
-    download.file(theUrl, destfile="dataArchive.zip", mode="wb")
-    unzip("dataArchive.zip")
-} else { 
-    message("Data archive exists, skipping download ...")
-    if(!file.exists("UCI HAR Dataset")) {
+if(file.exists("UCI HAR Dataset")) 
+{
+    message("Data subdirectory found. Skipping download and extraction steps.")
+
+} else { ## Need to extract OR download and extract.
+ 
+     if(file.exists("./dataArchive.zip")) ## Then extracting alone will do.
+    {
+        message("Extracting archive dataArchive.zip ...")
+        unzip("./dataArchive.zip")
+    } else if(file.exists("./getdata_projectfiles_UCI HAR Dataset.zip")) ## Again, extract only.
+
+    {
+        message("Extracting archive getdata_projectfiles_UCI HAR Dataset.zip ...")
+        unzip("getdata_projectfiles_UCI HAR Dataset.zip")
+
+    } else {  ## Need to both download and extract.
+
+        message("Data archive not found, downloading and expanding archive ...")
+        theUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+        download.file(theUrl, destfile="dataArchive.zip", mode="wb")
         unzip("dataArchive.zip")
-    } else {
-        message("Data folder exists, skipping extraction step ...")
     }
 }
 
@@ -127,4 +138,3 @@ if(!file.exists("dataArchive.zip")) {
     ##write.csv(theNewTidyData, "./NewTidyDataFile.csv")
     write.table(theNewTidyData, "./NewTidyDataFile.txt", row.name=FALSE)
     View(theNewTidyData)
-    

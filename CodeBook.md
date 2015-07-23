@@ -3,13 +3,13 @@
 
 # How to Run the Script #
 ==========================
-Note: For easier reading load into RStudio and click "Preview HTML" or open the HTML version of this file.
+Note: For easier reading, read from GitHub or load this file into RStudio and click "Preview HTML." 
 
 Place the script in R's current working directory and "source"" it with R.
 
-- If the zip archive is stored in DataArchive.zip in that directory, the download will be skipped.
+- If a "UCI HAR Dataset" subdirectory is in the working directory, the download and zip extraction step will be skipped.
 
-- If a "UCI HAR Dataset" subdirectory is in the working directory, the zip extraction step will be skipped.
+- If the zip archive is stored in "DataArchive.zip" or "getdata_projectfiles_UCI HAR Dataset" in the working directory, the download will be skipped.
 
 - These "skips"" reduce time and load on the server if the script is run multiple times. 
 
@@ -21,15 +21,15 @@ The details of how each step is performed are thoroughly documented in the comme
 The script file performs the following steps:
 
 1. Downloads and extracts the data archive to the current working directory
-	a. Downloading is skipped if the file "dataArchive.zip"" exists.
-	b. Extraction skipped if a "UCI HAR Dataset" subdirectory exists.
+	a. Download and extraction skipped if a "UCI HAR Dataset" subdirectory exists.
+	b. Downloading is skipped if the data archive exists exists in the working directory.
 
 2. Combines “test” and “train” data. E.g. subject_test and subject_train are concatenated in the single file, subject_test.
 
 3. Relevant columns are selected 
 	a. “Features” (column/variable names) are extracted from the file “features.txt”
 	b. Features with substring “mean” or “std” are identified by index, using grep commands.
-	c. The resulting indices are form the list of columns to be selected. These are stored in the vector “select_cols”.
+	c. The resulting indices form the list of columns to be selected. These are stored in the vector “select_cols”.
 	d. “select_cols” is used to select the columns from the original tables and to select the corresponding features for use as column names.
 	e. The subject and activity columns constructed from “subject_test.txt”, “y-test.txt”, and corresponding train files, are pre-pended to the rest of the data. Activities are translated from indices (1..6) to descriptive strings. 
 
@@ -59,21 +59,22 @@ The class discussion forums discuss tidy data and identify this format as the
        https://class.coursera.org/getdata-030/forum/thread?thread_id=204 
 
 
-# Variables, Feature Selection, & Units of Measure #
-===================================================
+# Variables, Feature Selection, and Units of Measure #
+=====================================================
 
 	## A Note On Units ##
 	-----------------------------------------------------------------
 
 	*From the README.txt file of the original archive:
 	“Features are normalized and bounded within [-1,1].”*
+	<end-quote>
 
-	*Consequently, the measures do not correspond to any particular
+	**Consequently, the measures do not correspond to any particular
        units. However, they are all consistent, and so retain usefulness
-       for comparison to each other within the dataset.*
+       for comparison to each other within the dataset.**
 	-------------------------------------------------------------------
 
-The variables of the new tidy data set relabled by prepending the string “GrpMean” to indicate that these are group means. e.g. tBodyAcc-XYZ becomes GrpMeantBodyAcc-XYZ to indicate the group mean of the indicated subject and activity for total body acceleration along X, Y, and Z axes. 
+The variables of the new tidy data set relabeled by prepending the string “GrpMean” to indicate that these are group means. e.g. tBodyAcc-XYZ becomes GrpMeantBodyAcc-XYZ to indicate the group mean of the indicated subject and activity for total body acceleration along X, Y, and Z axes. 
 
 The translation of each variable name is exactly the same as for the original variables, except that GrpMean indicates a group mean for a single combination of activity and subject. Which ones are indicated by the “subject” and “activity” variables in the tidy data set. 
 
@@ -168,10 +169,10 @@ For more information about this dataset contact: activityrecognition@smartlab.ws
 ========
 The following license statement was provided with the original data.
 
-Use of this dataset in publications must be acknowledged by referencing the following publication [1] 
-
-[1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
-
-This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
-
-Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.
+    Use of this dataset in publications must be acknowledged by referencing the following publication [1] 
+    
+    [1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+    
+    This dataset is distributed AS-IS and no responsibility implied or explicit can be addressed to the authors or their institutions for its use or misuse. Any commercial use is prohibited.
+    
+    Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita. November 2012.
