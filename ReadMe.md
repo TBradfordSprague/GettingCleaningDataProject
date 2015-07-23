@@ -9,13 +9,13 @@ output: html_document
 
 - **ReadMe.md** is this file. 
 
-- **run_analysis.R** is the R script that transforms the source data files into a single, cleaned data file, CleanedData.csv, and also creates a new tidy data file of group means, named NewTidyDataFile.txt. *If you run the script, "CleanedData.csv" will appear, but may be safely ignored.* For further analysis of the data, however, would likely be useful.
+- **run_analysis.R** is the R script that transforms the source data files into a single, cleaned data file, CleanedData.csv, and also creates a new tidy data file of group means, named NewTidyDataFile.txt. *If you run the script, "CleanedData.csv" will appear, but may be safely ignored.* For further analysis of the data, however, it would likely be useful.
 
 - **NewTidyDataFile.txt** is the tidy data file of group means by activity and subject required in the project assignment. 
 
 - **CleanedData.csv** is the cleaned data which will be produced if you run the R script. *This file is not in this repo and is not a required part of the course project. If you run the script and it appears, you may ignore it.* 
 
-- **CodeBook.md** documents the variables in the files NewTidyData.csv and CleanedData.csv together with the steps taken by the script "run_analysis.R" to produce the csv file. A reference section is included at the end documenting the data sources.
+- **CodeBook.md** documents the variables in the files NewTidyData.csv and CleanedData.csv together with the steps taken by the script "run_analysis.R" to produce the csv file and NewTidyDataFile.txt. A reference section is included at the end documenting the data sources.
 
 * Please note: The .md files, while legible, are not conveniently human readable. Reading through GitHub or RStudio's "Preveiw HTML" function is recommended.
 
@@ -46,7 +46,7 @@ The script run_analysis.R:
 	e. Tidy the data by separating activity and subject variables. 
 	f. Sort rows by activity first, then subject. 
 
-The final step makes it easy to verify the success in a View() windows.
+The final step makes it easy to verify the success in a View() window.
 
 ## Running the Script on Mac or Linux ##
 
