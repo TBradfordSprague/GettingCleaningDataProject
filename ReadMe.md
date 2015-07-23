@@ -1,7 +1,7 @@
 ---
 output: html_document
 ---
-# ReadMe: A Guide to the Files in this Repository #
+# ReadMe: A Guide to the Files and Scripts in this Repository #
 
 *This is an R markdown file. It is easiest to read from GitHub or from RStudio. In RStudio load and click "Preview HTML."
 
@@ -9,7 +9,7 @@ output: html_document
 
 - **ReadMe.md** is this file. 
 
-- **run_analysis.R** is the R script that transforms the source data files into a single, cleaned data file, CleanedData.csv. *If you run the script, "CleanedData.csv" will appear, but may be safely ignored.*
+- **run_analysis.R** is the R script that transforms the source data files into a single, cleaned data file, CleanedData.csv, and also creates a new tidy data file of group means, named NewTidyDataFile.txt. *If you run the script, "CleanedData.csv" will appear, but may be safely ignored.* For further analysis of the data, however, would likely be useful.
 
 - **NewTidyDataFile.txt** is the tidy data file of group means by activity and subject required in the project assignment. 
 
@@ -48,6 +48,20 @@ The script run_analysis.R:
 
 The final step makes it easy to verify the success in a View() windows.
 
+## Running the Script on Mac or Linux ##
+
+The script should work for all platforms, **except for the downloading step.**
+
+I am told the solution is to search for the line 
+
+    download.file(theUrl, destfile="dataArchive.zip", mode="wb") 
+
+and modify to 
+
+    download.file(theUrl, destfile="dataArchive.zip", mode="wb", method = "Curl")
+    
+Since I program on Windows 7, I cannot verify this solution. Presumably Mac and Linux programmers know the details of downloading files on their platforms.
+
 ##Data Sources ##
 
 These data were obtained from the following file specifically stored for the Coursera course, “Getting and Cleaning Data.” Here is a link to the original file from the course.
@@ -69,13 +83,9 @@ The included script file, run_analysis.R, can be run from any directory. It will
 The download and extraction steps may be easily avoided.
 
 ## Avoiding the download and extraction ##
-The script can be used without the download and extraction steps. Simply place the zip archive in R's current working directory under the filename "dataArchive.zip." Then extract the archive to that same directory. If the archive is not manually extracted before the script is run, the script will perform this step.
+The script can be used without the download and extraction steps. Simply place the extracted data from the archive in a subdirectory **of R's current working directory** named **"UCI HAR Dataset"**. The script will find the directory and assume it contains the necessary data. Extracting the downloaded archive from the R command line, "unzip("getdata_projectfiles_UCI HAR Dataset.zip")", will produce exactly this subdirectory. 
+
+Extracting from Windows Explorer by default creates the subdirectory "getdata_projectfiles_UCI HAR Dataset" which in turn contains the subdirectory "UCI HAR Dataset." It *is* inconvenient, but easy to work around. Simply move the "UCI HAR Dataset" subdirectory up to R's current working directory and delete the now empty parent. The script will then find the data and avoid the download and extraction.
 
 ## No double-downloading ##
-As written, the script checks to see whether the data archive exits. The archive is assumed to be named "dataArchive.zip" and must be in R's current working directory. If not, the script downloads and extracts the archive. 
-
-If the script finds "dataArchive.zip," it checks for a subdirectory named "UCI HAR Dataset." If this subdirectory is found, the scirpt assumes the download and extraction has already been completed.
-
-The script will break if "dataArchive.zip" and "UCI HAR Dataset" both exist, but the subdirectory does not contain the expected files in the expected location. If a problem develops, delete the subdirectory and/or the archive and let the script perform these steps.
-
-The purpose in checking for the existence of the archive is to avoid repeated downloads once the archive has been obtained. If a repeated download is desired, simply move, rename, or delete the previous archive and re-run the script.
+Since the script checks to see whether the data subdirectory exists, it will not download the data twice if downloading was successful. It will not extract twice if extraction is successful.
