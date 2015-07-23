@@ -58,7 +58,7 @@ I am told the solution is to search for the line
 
 and modify to 
 
-    download.file(theUrl, destfile="dataArchive.zip", mode="wb", method = "Curl")
+    download.file(theUrl, destfile="dataArchive.zip", mode="wb", method = "curl")
     
 Since I program on Windows 7, I cannot verify this solution. Presumably Mac and Linux programmers know the details of downloading files on their platforms.
 
